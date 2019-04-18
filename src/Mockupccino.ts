@@ -33,9 +33,11 @@ function main(args: Array<string>) {
     cliProgram
         .arguments("[configurationfile]")
         .action(function (configurationfile) {
-            Logger.info("Default config file overridden by : ");
-            Logger.info(configurationfile);
-            configFile = configurationfile;
+            if (!_.isNil(configurationfile)) {
+                Logger.info("Default config file overridden by : ");
+                Logger.info(configurationfile);
+                configFile = configurationfile;
+            }
         })
         .option("-p, --port <n>", "the server port", parseInt)
         .parse(args);
